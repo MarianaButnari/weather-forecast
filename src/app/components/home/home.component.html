@@ -1,0 +1,7 @@
+<app-zip/>
+
+@for (zip of storedKeys; track zip) {
+  <a [routerLink]="['/forecast', zip]" >
+    <app-location [locationZip]="zip" (panelClosed)="deleteForecast(zip)"/>
+  </a>
+}

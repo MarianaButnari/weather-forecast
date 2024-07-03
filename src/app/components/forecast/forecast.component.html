@@ -1,0 +1,15 @@
+<fieldset>
+  <legend *ngIf="forecast && forecast.city">{{ forecast.city.name }}</legend>
+  <button (click)="moveBackToHome()">Go Back</button>
+  <div *ngIf="forecast">
+    <ol *ngIf="forecast.list">
+      @for (day of forecast.list | slice: 0 : 5; track day) {
+        <li>
+          <span>{{ day.dt | timestampToDate }}: {{ day.weather[0].main }} - High: {{ day.temp.max }}
+            - Low: {{ day.temp.min }}</span>
+          <img [src]="day.weather[0].main | conditionToImg" alt="condition" height="50px" width="50px">
+        </li>
+      }
+    </ol>
+  </div>
+</fieldset>
