@@ -1,9 +1,20 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Signal, signal} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+  private zipSignal = signal<string>('');
+
+  setZip(zip: string): void {
+    this.zipSignal.set(zip);
+  }
+
+  get zipCode(): Signal<string> {
+    return this.zipSignal.asReadonly();
+  }
+
+
   setItem(newZip: string): void {
     let storedKeys = this.getStoredZip();
     storedKeys.push(newZip);

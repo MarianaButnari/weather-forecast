@@ -17,6 +17,7 @@ export class ZipComponent {
 
   save() {
     this.localStorageService.setItem(this.zipCode.value!);
+    this.localStorageService.setZip(this.zipCode.value!);
     this.zipCode.reset();
   }
 }
