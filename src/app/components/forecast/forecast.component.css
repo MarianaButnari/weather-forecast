@@ -1,6 +1,12 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
 ol {
   list-style: none;
 }
+
 li {
   display: flex;
   flex-direction: row;

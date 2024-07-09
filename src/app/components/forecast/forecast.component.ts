@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router, RouterLink} from '@angular/router';
 import {WeatherService} from '../../shared/services/weather.service';
 import {map, switchMap} from 'rxjs';
 import {Forecast} from '../../shared/models/forecast';
@@ -14,7 +14,7 @@ import {ConditionToImgPipe} from '../../shared/pipes/condition-to-img.pipe';
     NgIf,
     TimestampToDatePipe,
     ConditionToImgPipe,
-    SlicePipe
+    SlicePipe,
   ],
   templateUrl: './forecast.component.html',
   styleUrl: './forecast.component.css'
@@ -28,7 +28,9 @@ export class ForecastComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(
       map((params: ParamMap) => params.get('zipcode')!),
-      switchMap(zip => this.weatherService.getDailyForecast(zip))
+      switchMap((zip: string) => {
+        return this.weatherService.getDailyForecast(zip)
+      })
     ).subscribe((result: Forecast) => {
       this.forecast = result;
     });

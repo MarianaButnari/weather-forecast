@@ -3,14 +3,15 @@ import {WeatherService} from '../../shared/services/weather.service';
 import {Location} from '../../shared/models/location';
 import {CommonModule, JsonPipe} from '@angular/common';
 import {ConditionToImgPipe} from '../../shared/pipes/condition-to-img.pipe';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-location',
   standalone: true,
   imports: [
     CommonModule,
-    JsonPipe,
-    ConditionToImgPipe
+    ConditionToImgPipe,
+    RouterLink
   ],
   templateUrl: './location.component.html',
   styleUrl: './location.component.css'

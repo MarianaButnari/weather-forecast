@@ -4,13 +4,20 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .location {
   flex-grow: 1;
 }
+
 .delete_btn {
   align-self: start;
 }
+
 .max_min_today {
   display: flex;
   flex-direction: row;
+}
+
+.location:hover {
+  cursor: pointer;
 }

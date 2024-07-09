@@ -4,8 +4,7 @@ import {ZipComponent} from '../zip/zip.component';
 import {LocalStorageService} from '../../shared/services/local-storage.service';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
-import {filter} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +19,15 @@ export class HomeComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private localStorageService = inject(LocalStorageService);
   protected storedKeys: string[] = this.localStorageService.getStoredZip();
-  private readonly zip$ = toObservable(this.localStorageService.zipCode);
 
   ngOnInit(): void {
+    this.localStorageService.getZip().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(result => {
+      if (result) {
+        this.extractZipFromLocalStorage();
+      }
+    })
   }
 
   deleteForecast(zip: string) {

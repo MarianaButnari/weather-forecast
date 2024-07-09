@@ -1,7 +1,10 @@
 <app-zip/>
+@if (storedKeys.length) {
 
-@for (zip of storedKeys; track zip) {
-  <a [routerLink]="['/forecast', zip]" >
-    <app-location [locationZip]="zip" (panelClosed)="deleteForecast(zip)"/>
-  </a>
+  @for (zip of storedKeys; track zip) {
+    <app-location [locationZip]="zip" (panelClosed)="deleteForecast(zip)">
+    </app-location>
+  }
+} @else {
+  <h2>Pass some US zip codes</h2>
 }

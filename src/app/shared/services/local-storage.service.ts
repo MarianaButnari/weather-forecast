@@ -1,19 +1,19 @@
 import {Injectable, Signal, signal} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private zipSignal = signal<string>('');
+  private zip$ = new Subject<string>();
 
-  setZip(zip: string): void {
-    this.zipSignal.set(zip);
+  setZip(zip: string) {
+    this.zip$.next(zip);
   }
 
-  get zipCode(): Signal<string> {
-    return this.zipSignal.asReadonly();
+  getZip(): Observable<string> {
+    return this.zip$.asObservable();
   }
-
 
   setItem(newZip: string): void {
     let storedKeys = this.getStoredZip();

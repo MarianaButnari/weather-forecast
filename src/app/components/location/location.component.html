@@ -1,7 +1,7 @@
 <fieldset>
   <legend *ngIf="locationWeather">{{ locationWeather.name }}</legend>
   <div class="weather_card">
-    <div class="location">
+    <div class="location" [routerLink]="['/forecast', locationZip]">
       <div>
         <span>Current condition</span>
         <span *ngIf="locationWeather && locationWeather.weather && locationWeather.weather[0]">
