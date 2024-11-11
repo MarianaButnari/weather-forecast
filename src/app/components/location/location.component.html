@@ -1,12 +1,43 @@
-<fieldset>
+<!-- <fieldset>
   <legend *ngIf="locationWeather">{{ locationWeather.name }}</legend>
   <div class="weather_card">
     <div class="location" [routerLink]="['/forecast', locationZip]">
       <div>
         <span>Current condition</span>
         <span *ngIf="locationWeather && locationWeather.weather && locationWeather.weather[0]">
-      {{ locationWeather.weather[0].main }}
-    </span>
+          {{ locationWeather.weather[0].main }}
+        </span>
+      </div>
+      <div>
+        <span>Temperature</span>
+        <span *ngIf="locationWeather && locationWeather.main">{{ locationWeather.main.temp }}</span>
+      </div>
+      <div class="max_min_today">
+        <div *ngIf="locationWeather && locationWeather.main">
+          <span>Max today</span> <span>{{ locationWeather.main.temp_max }}</span>
+        </div>
+        <div *ngIf="locationWeather && locationWeather.main">
+          <span>Min today</span> <span>{{ locationWeather.main.temp_min }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="weather_img" *ngIf="locationWeather && locationWeather.weather && locationWeather.weather[0]">
+      <img [src]="locationWeather.weather[0].main | conditionToImg " alt="">
+    </div>
+    <button class="delete_btn" (click)="panelClosed.emit()">X</button>
+  </div>
+</fieldset> -->
+
+@if(locationWeather$ | async; as locationWeather) {
+<fieldset>
+  <legend>{{ locationWeather.name }}</legend>
+  <div class="weather_card">
+    <div class="location" [routerLink]="['/forecast', locationZip]">
+      <div>
+        <span>Current condition</span>
+        <span *ngIf="locationWeather && locationWeather.weather && locationWeather.weather[0]">
+          {{ locationWeather.weather[0].main }}
+        </span>
       </div>
       <div>
         <span>Temperature</span>
@@ -27,3 +58,4 @@
     <button class="delete_btn" (click)="panelClosed.emit()">X</button>
   </div>
 </fieldset>
+}
